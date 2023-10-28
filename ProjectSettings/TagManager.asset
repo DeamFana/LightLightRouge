@@ -3,12 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Symbol
+  - ChangeStateSymbol
+  - ChangePositionSymbol
+  - RespinSymbol
+  - DestroySymbol
+  - AddSymbol
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Symbol
   - Water
   - UI
   - 
