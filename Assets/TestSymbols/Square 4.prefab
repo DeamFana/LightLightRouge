@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5758542674194431631}
   - component: {fileID: 3431239864103899304}
-  - component: {fileID: 6171549179772337351}
+  - component: {fileID: 4348184464260297483}
   m_Layer: 0
-  m_Name: Square
-  m_TagString: Symbol
+  m_Name: Square 4
+  m_TagString: AddSymbol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6846849611123505062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8799999, y: 2.8799999, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.29951286, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6171549179772337351
+--- !u!114 &4348184464260297483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6846849611123505062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b6f05ac17da89d47a7a7aaefd1ff29c, type: 3}
+  m_Script: {fileID: 11500000, guid: 14827168148470e48bfaaab3a7f7d174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   symbolName: 
   quality: 0
   value: 0
+  Roulette: {fileID: 0}
+  symbolToAdd: {fileID: 6846849611123505062, guid: 744a79934d272294a8fd18acb9078760, type: 3}

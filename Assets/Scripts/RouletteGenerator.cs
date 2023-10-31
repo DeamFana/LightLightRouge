@@ -213,8 +213,6 @@ public class RouletteGenerator : MonoBehaviour
         SymbolsEvent();
     }
 
-
-
     public void SymbolsEvent()
     {
         foreach (var item in GameObject.FindGameObjectsWithTag("ChangeStateSymbol"))
@@ -241,7 +239,6 @@ public class RouletteGenerator : MonoBehaviour
         toAddToRoulette();
     }
 
-    //TODO: 指定选中周围的类型：周围一圈，周围十字，周围斜十字
     public List<int[]> getSurroundingPosition(GameObject target, int pattern)
     {
         int[,] direction = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, -1 } };
@@ -291,7 +288,14 @@ public class RouletteGenerator : MonoBehaviour
                     {
                         indexPos[0] += direction[i, 0];
                         indexPos[1] += direction[i, 1];
-                        if (symbolRoulette[indexPos[0], indexPos[1]] != null) result.Add(indexPos);
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(temp);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
                         indexPos[0] = targetPos[0];
                         indexPos[1] = targetPos[1];
                     }
@@ -303,7 +307,137 @@ public class RouletteGenerator : MonoBehaviour
                     {
                         indexPos[0] += direction[i, 0];
                         indexPos[1] += direction[i, 1];
-                        if (symbolRoulette[indexPos[0], indexPos[1]] != null) result.Add(indexPos);
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(temp);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
+                        indexPos[0] = targetPos[0];
+                        indexPos[1] = targetPos[1];
+                    }
+                }
+                break;
+            case 3:
+                {
+                    for (int i = 0; i < direction.GetLength(0); i += 2)
+                    {
+                        indexPos[0] += direction[i, 0];
+                        indexPos[1] += direction[i, 1];
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(temp);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
+                        indexPos[0] = targetPos[0];
+                        indexPos[1] = targetPos[1];
+                    }
+                }
+                break;
+            default:
+                {
+                    for (int i = 0; i < direction.GetLength(0); i += 2)
+                    {
+                        indexPos[0] += direction[i, 0];
+                        indexPos[1] += direction[i, 1];
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(temp);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
+                        indexPos[0] = targetPos[0];
+                        indexPos[1] = targetPos[1];
+                    }
+                }
+                break;
+        }
+
+        return result;
+    }
+    public List<GameObject> getSurroundingObjects(GameObject target, int pattern)
+    {
+        int[,] direction = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, -1 } };
+        int[] targetPos = new int[2], indexPos = new int[2], temp;
+        List<GameObject> result = new List<GameObject>();
+
+        for (int i = 0; i < symbolRoulette.GetLength(0); i++)
+        {
+            for (int j = 0; j < symbolRoulette.GetLength(1); j++)
+            {
+                if (target == symbolRoulette[i, j])
+                {
+                    targetPos[0] = i;
+                    targetPos[1] = j;
+                }
+            }
+        }
+        indexPos[0] = targetPos[0];
+        indexPos[1] = targetPos[1];
+
+        switch (pattern)
+        {
+            case 0:
+                {
+                    for (int i = 0; i < direction.GetLength(0); i++)
+                    {
+                        indexPos[0] += direction[i, 0];
+                        indexPos[1] += direction[i, 1];
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(symbolRoulette[temp[0], temp[1]]);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
+                        indexPos[0] = targetPos[0];
+                        indexPos[1] = targetPos[1];
+                    }
+                }
+                break;
+            case 1:
+                {
+                    for (int i = 1; i < direction.GetLength(0); i += 2)
+                    {
+                        indexPos[0] += direction[i, 0];
+                        indexPos[1] += direction[i, 1];
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(symbolRoulette[temp[0], temp[1]]);
+                            //Debug.Log(symbolRoulette[indexPos[0], indexPos[1]].transform.position);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
+                        indexPos[0] = targetPos[0];
+                        indexPos[1] = targetPos[1];
+                    }
+                }
+                break;
+            case 2:
+                {
+                    for (int i = 0; i < direction.GetLength(0); i += 2)
+                    {
+                        indexPos[0] += direction[i, 0];
+                        indexPos[1] += direction[i, 1];
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(symbolRoulette[temp[0], temp[1]]);
+                            //Debug.Log(symbolRoulette[indexPos[0], indexPos[1]].transform.position);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
                         indexPos[0] = targetPos[0];
                         indexPos[1] = targetPos[1];
                     }
@@ -315,7 +449,15 @@ public class RouletteGenerator : MonoBehaviour
                     {
                         indexPos[0] += direction[i, 0];
                         indexPos[1] += direction[i, 1];
-                        if (symbolRoulette[indexPos[0], indexPos[1]] != null) result.Add(indexPos);
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(symbolRoulette[temp[0], temp[1]]);
+                            //Debug.Log(symbolRoulette[indexPos[0], indexPos[1]].transform.position);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
                         indexPos[0] = targetPos[0];
                         indexPos[1] = targetPos[1];
                     }
@@ -327,7 +469,15 @@ public class RouletteGenerator : MonoBehaviour
                     {
                         indexPos[0] += direction[i, 0];
                         indexPos[1] += direction[i, 1];
-                        if (symbolRoulette[indexPos[0], indexPos[1]] != null) result.Add(indexPos);
+                        if (symbolRoulette[indexPos[0], indexPos[1]] != null)
+                        {
+                            temp = new int[2];
+                            temp[0] = indexPos[0];
+                            temp[1] = indexPos[1];
+                            result.Add(symbolRoulette[temp[0], temp[1]]);
+                            //Debug.Log(symbolRoulette[indexPos[0], indexPos[1]].transform.position);
+                        }
+                        roulette.SetTile(new Vector3Int(indexPos[1], indexPos[0]), DebugTile);
                         indexPos[0] = targetPos[0];
                         indexPos[1] = targetPos[1];
                     }
